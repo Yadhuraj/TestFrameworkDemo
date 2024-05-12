@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2024-05-12T16:37:07 IST" name="Suite" finished-at="2024-05-12T16:37:49 IST" duration-ms="41822">
+    <groups>
+    </groups>
+    <test started-at="2024-05-12T16:37:07 IST" name="Test" finished-at="2024-05-12T16:37:49 IST" duration-ms="41822">
+      <class name="com.lti.testcases.PaymentTest">
+        <test-method is-config="true" signature="beforetest()[pri:0, instance:com.lti.testcases.PaymentTest@5c5eefef]" started-at="2024-05-12T16:37:08 IST" name="beforetest" finished-at="2024-05-12T16:37:19 IST" duration-ms="11256" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforetest -->
+        <test-method signature="dashboard()[pri:1, instance:com.lti.testcases.PaymentTest@5c5eefef]" started-at="2024-05-12T16:37:19 IST" name="dashboard" finished-at="2024-05-12T16:37:49 IST" duration-ms="29839" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- dashboard -->
+        <test-method is-config="true" signature="aftertest()[pri:0, instance:com.lti.testcases.PaymentTest@5c5eefef]" started-at="2024-05-12T16:37:49 IST" name="aftertest" finished-at="2024-05-12T16:37:49 IST" duration-ms="343" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- aftertest -->
+      </class> <!-- com.lti.testcases.PaymentTest -->
+    </test> <!-- Test -->
+  </suite> <!-- Suite -->
+</testng-results>

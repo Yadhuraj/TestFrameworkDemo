@@ -1,0 +1,96 @@
+package com.lti.utilities;
+
+import java.io.File;
+
+import org.testng.ITestContext;
+import org.testng.ITestListener;
+import org.testng.ITestResult;
+
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.markuputils.ExtentColor;
+import com.aventstack.extentreports.markuputils.Markup;
+import com.aventstack.extentreports.markuputils.MarkupHelper;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+import com.aventstack.extentreports.reporter.configuration.Theme;
+
+public class ExtentITestListener implements ITestListener {
+	ExtentSparkReporter htmlReporter;
+	ExtentReports reports;
+	ExtentTest test;
+
+	public void configureReport() {
+		htmlReporter = new ExtentSparkReporter("ExtentSparkReporterDemo.html");
+		reports = new ExtentReports();
+		reports.attachReporter(htmlReporter);
+
+		reports.setSystemInfo("Machine", "Yadhu PC");
+		reports.setSystemInfo("OS", "Windows10");
+
+		htmlReporter.config().setDocumentTitle("Extent Listener Report Demo");
+		htmlReporter.config().setReportName("This is my first Report");
+		htmlReporter.config().setTheme(Theme.DARK);
+	}
+
+	@Override
+	public void onTestStart(ITestResult result) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onTestSuccess(ITestResult result) {
+		// TODO Auto-generated method stub
+		System.out.println("Test Case Passed: " + result.getName());
+		test = reports.createTest(result.getName());
+		test.log(Status.PASS,
+				MarkupHelper.createLabel("Name of the pass test case is: " + result.getName(), ExtentColor.GREEN));
+		
+	}
+
+	@Override
+	public void onTestFailure(ITestResult result) {
+		// TODO Auto-generated method stub
+		System.out.println("Test Case Failed: " + result.getName());
+		test=reports.createTest(result.getName());
+	    test.log(Status.FAIL, MarkupHelper.createLabel("Name of the fail test case is: "+result.getName(),ExtentColor.RED));
+	    
+	    String screenShotPath= System.getProperty("user.dir") +"\\Screenshots\\" + result.getName() + ".png";
+	    
+	    File screenShotFile = new File(screenShotPath);
+	    
+	    if(screenShotFile.exists())
+	    {
+	    	test.fail("Captured Screenshot is below:" +test.addScreenCaptureFromPath(screenShotPath));
+	    }
+	}
+
+	public void onTestSkipped(ITestResult result) {
+	    System.out.println("Name of test method skipped "+result.getName());
+	    test=reports.createTest(result.getName());
+	    test.log(Status.SKIP, MarkupHelper.createLabel("Name of the skip test case is: "+result.getName(),ExtentColor.YELLOW));
+	  }
+
+
+	  public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
+	  
+	  }
+
+	
+	  public void onTestFailedWithTimeout(ITestResult result) {
+	    onTestFailure(result);
+	  }
+
+	 
+	  public void onStart(ITestContext context) {
+	    configureReport();
+	    System.out.println("On start method invoked.....");
+	  }
+
+	
+	  public void onFinish(ITestContext context) {
+	    System.out.println("On Finished method invoked.....");
+	    reports.flush();// it is mandatory to call flush method to ensure information is written ti the started reporter. 
+	  }
+}
